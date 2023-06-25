@@ -1,19 +1,30 @@
 #include "main.h"
 
 /**
- * more_numbers - print more numbers
+ * more_numbers - prints 01234567891011121314\n x10
+ *
+ * Return: void
  */
+
 
 void more_numbers(void)
 {
-	int i, j;
+	char a, b, c, i;
 
-	for (i = 1; i <= 10; i++)
-		for (j = 0; j <= 14; j++)
+	for (i = 0; i < 10; i++)
+	{
+		for (c = 0; c <= 14; c++)
 		{
-			if (j >= 10)
-			_putchar('1');
-		_putchar (j % 10 + '0');
+			if (c < 10)
+				b = c;
+			else
+			{
+				a = c / 10;
+				b = c % 10;
+				_putchar('0' + a);
+			}
+			_putchar('0' + b);
 		}
-		_putchar("\n");
+		_putchar('\n');
+	}
 }
