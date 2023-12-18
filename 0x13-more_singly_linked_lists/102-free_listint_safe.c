@@ -1,40 +1,70 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - frees a linked list
- * @h: pointer to the first node in the linked list
- *
- * Return: number of elements in the freed list
+ * free_listp2 - free a list
+ * @head: node head
+ * Return: nothing
+ */
+void free_listp2(listp_t **head)
+{
+	listp_t *tmpt;
+	listp_t *node;
+
+	if (head != NULL)
+	{
+		node = *head;
+		while ((tmpt = node) != NULL)
+		{
+			node = node->next;
+			free(tmpt);
+		}
+		*head = NULL;
+	}
+}
+
+/**
+ * free_listint_safe - safe free list
+ * @h: node head
+ * Return: free byte
  */
 size_t free_listint_safe(listint_t **h)
 {
-size_t len = 0;
-int diff;
-listint_t *temp;
+	size_t node_block = 0;
+	listp_t *ptr_head, *new, *append;
+	listint_t *node;
 
-if (!h || !*h)
-return (0);
+	ptr_head = NULL;
+	while (*h != NULL)
+	{
+		new = malloc(sizeof(listp_t));
 
-while (*h)
-{
-diff = *h - (*h)->next;
-if (diff > 0)
-{
-temp = (*h)->next;
-free(*h);
-*h = temp;
-len++;
-}
-else
-{
-free(*h);
-*h = NULL;
-len++;
-break;
-}
-}
+		if (new == NULL)
+			exit(98);
 
-*h = NULL;
+		new->p = (void *)*h;
+		new->next = ptr_head;
+		ptr_head = new;
 
-return (len);
+		append = ptr_head;
+
+		while (append->next != NULL)
+		{
+			append = append->next;
+			if (*h == append->p)
+			{
+				*h = NULL;
+				free_listp2(&ptr_head);
+				return (node_block);
+			}
+		}
+
+		node = *h;
+		*h = (*h)->next;
+		free(node);
+		node_block++;
+	}
+
+	*h = NULL;
+	free_listp2(&ptr_head);
+	return (node_block);
 }
