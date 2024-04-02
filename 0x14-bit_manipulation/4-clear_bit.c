@@ -1,13 +1,11 @@
 #include "main.h"
 
 /**
- * clear_bit - Sets the value of a bit at a specified index to 0.
- * @n: A pointer to an unsigned long integer.
- * @index: The index of the bit to clear (0 to 63).
+ * clear_bit - sets the value of a given bit to 0
+ * @n: pointer to the number to change
+ * @index: index of the bit to clear
  *
- * Description: This function sets the bit at the given index in 'n' to 0, effectively clearing it.
- *
- * Return: 1 if the operation was successful, -1 if the index is out of range.
+ * Return: 1 for success, -1 for failure
  */
 int clear_bit(unsigned long int *n, unsigned int index)
 {

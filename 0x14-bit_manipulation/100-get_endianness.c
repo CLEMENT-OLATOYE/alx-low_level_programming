@@ -13,8 +13,8 @@
  */
 int get_endianness(void)
 {
-    unsigned int value = 1;
-    char *byteRepresentation = (char *) &value;
+	unsigned int value = 1;
+	char *byteRepresentation = (char *) &value;
 
-    return ((int) *byteRepresentation);
+	return ((int) *byteRepresentation);
 }
